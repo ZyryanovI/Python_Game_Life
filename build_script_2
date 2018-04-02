@@ -7,8 +7,10 @@ read test_flag
 
 if [[ $test_flag = 'w' ]]
 then
+    chmod +x ./test.py
     ./test.py
 else
     echo "If you want to work with files write f before description of the first state"
+    chmod +x ./main.py
     ./main.py
 fi

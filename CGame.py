@@ -1,3 +1,6 @@
+import collections
+
+
 class Game:
     cell_types = ['n', 'f', 'r', 's']
 
@@ -12,10 +15,9 @@ class Game:
                 self.world[i][j] = lst[i][j]
 
     def get_neighbors(self, x, y):
-        dict_count = {'n': 0,
-                      'f': 0,
-                      'r': 0,
-                      's': 0}
+        dict_count = collections.defaultdict(int)
+        for k in self.cell_types:
+            dict_count[k] = 0
         for i in [1, -1, 0]:
             for j in [1, -1, 0]:
                 if (x + i >= 0) and (x + i < self.height):

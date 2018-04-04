@@ -23,14 +23,7 @@ class Game:
                 if (x + i >= 0) and (x + i < self.height):
                     if (y + j >= 0) and (y + j < self.weight):
                         if (not i == 0) or (not j == 0):
-                            if self.world[x+i][y+j] == 'n':
-                                dict_count['n'] += 1
-                            elif self.world[x+i][y+j] == 'f':
-                                dict_count['f'] += 1
-                            elif self.world[x+i][y+j] == 'r':
-                                dict_count['r'] += 1
-                            elif self.world[x+i][y+j] == 's':
-                                dict_count['s'] += 1
+                            dict_count[self.world[x+i][y+j]] += 1
         return dict_count
 
     def update_world(self):

@@ -1,14 +1,18 @@
 from CGame import Game
-from abc import abstractmethod
 
 #  ***********************************************************************
 
 
 class ITest:
 
-    @abstractmethod
     def do_test(self):
         ''' func '''
+
+    def print_ok(self, i):
+        print('test ', i, ' - Ok')
+
+    def print_error(self, i):
+        print('Wrong test ', i)
 
 
 class TestSize11(ITest):
@@ -19,10 +23,9 @@ class TestSize11(ITest):
         for l in range(12):
             my_world.update_world()
         if my_world.world[0][0] == 'n':
-            print('test_1_1 - OK')
+            return True
         else:
-            print('Wrong')
-            my_world.print_world()
+            return False
 
 
 class TestSize12(ITest):
@@ -33,10 +36,9 @@ class TestSize12(ITest):
         for l in range(7):
             my_world.update_world()
         if my_world.world[0][0] == 'r':
-            print('test_1_2 - OK')
+            return True
         else:
-            print('Wrong')
-            my_world.print_world()
+            return False
 
 
 class TestSize21(ITest):
@@ -47,10 +49,9 @@ class TestSize21(ITest):
         for l in range(8):
             my_world.update_world()
         if my_world.world == [['f', 'f'], ['f', 'f']]:
-            print('test_2_1 - OK')
+            return True
         else:
-            print('Wrong')
-            my_world.print_world()
+            return False
 
 
 class TestSize22(ITest):
@@ -61,10 +62,9 @@ class TestSize22(ITest):
         for l in range(2):
             my_world.update_world()
         if my_world.world == [['f', 'f'], ['f', 'f']]:
-            print('test_2_2 - OK')
+            return True
         else:
-            print('Wrong')
-            my_world.print_world()
+            return False
 
 
 class TestSize23(ITest):
@@ -75,10 +75,9 @@ class TestSize23(ITest):
         for l in range(3):
             my_world.update_world()
         if my_world.world == [['n', 'n'], ['n', 'n']]:
-            print('test_2_3 - OK')
+            return True
         else:
-            print('Wrong')
-            my_world.print_world()
+            return False
 
 
 class TestSize31(ITest):
@@ -89,10 +88,9 @@ class TestSize31(ITest):
         for l in range(3):
             my_world.update_world()
         if my_world.world == [['n', 'f', 'n'], ['f', 'n', 'f'], ['n', 'f', 'n']]:
-            print('test_3_1 - OK')
+            return True
         else:
-            print('Wrong')
-            my_world.print_world()
+            return False
 
 
 class TestSize32(ITest):
@@ -103,10 +101,9 @@ class TestSize32(ITest):
         for l in range(3):
             my_world.update_world()
         if my_world.world == [['n', 'n', 'n'], ['n', 'n', 'n']]:
-            print('test_3_2 - OK')
+            return True
         else:
-            print('Wrong')
-            my_world.print_world()
+            return False
 
 
 class TestSizeN(ITest):
@@ -126,11 +123,9 @@ class TestSizeN(ITest):
             for l_ in range(50):
                 if not my_world.world[l][l_] == 'n':
                     return False
-                    print('Wrong')
-                    my_world.print_world()
-                    break
 
-        print('test_n - OK')
+
+        return True
 
 #  ***********************************************************************
 
@@ -139,7 +134,12 @@ def custom_tests():
     test_list = [TestSize11(), TestSize12(), TestSize21(), TestSize22(), TestSize23(),
                  TestSize31(), TestSize32(), TestSizeN()]
     for i in range(len(test_list)):
-        test_list[i].do_test()
+        if test_list[i].do_test():
+            test_list[i].print_ok(i+1)
+        else:
+            test_list[i].print_error(i+1)
+
+
     print("That is all")
 
 

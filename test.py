@@ -123,16 +123,57 @@ class TestSizeN(ITest):
             for l_ in range(50):
                 if not my_world.world[l][l_] == 'n':
                     return False
-
-
         return True
+
+
+class TestMakeSteps(ITest):
+    def do_test(self):
+        my_world = Game(2, 3)
+        my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
+        my_world.make_steps(3)
+        if my_world.world == [['n', 'n', 'n'], ['n', 'n', 'n']]:
+            return True
+        else:
+            return False
+
+
+class TestSetWorld(ITest):
+    def do_test(self):
+        my_world = Game(2, 3)
+        my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
+        if my_world.world == [['f', 'f', 'f'], ['f', 'f', 'f']]:
+            return True
+        else:
+            return False
+
+
+class TestInit(ITest):
+    def do_test(self):
+        my_world = Game(1, 1)
+        if (my_world.weight == 1) and (my_world.height == 1) and (my_world.world[0][0] == 'n'):
+            return True
+        else:
+            return False
+
+
+class TestGetNeighbors(ITest):
+    def do_test(self):
+        my_world = Game(2, 2)
+        my_world.set_world([['n', 'f'], ['f', 's']])
+        d_f_t = my_world.get_neighbors(0, 0)
+        if (d_f_t['n'] == 0) and (d_f_t['f'] == 2) and (d_f_t['s'] == 1) and (d_f_t['r'] == 0):
+            return True
+        else:
+            return False
+
 
 #  ***********************************************************************
 
 
 def custom_tests():
     test_list = [TestSize11(), TestSize12(), TestSize21(), TestSize22(), TestSize23(),
-                 TestSize31(), TestSize32(), TestSizeN()]
+                 TestSize31(), TestSize32(), TestSizeN(), TestMakeSteps(), TestSetWorld(),
+                 TestInit(), TestGetNeighbors()]
     for i in range(len(test_list)):
         if test_list[i].do_test():
             test_list[i].print_ok(i+1)

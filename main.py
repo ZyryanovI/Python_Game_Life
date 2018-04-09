@@ -1,5 +1,4 @@
-from CGame import Game
-from CGame import read_world
+from CGame import *
 
 
 ls = input()
@@ -30,5 +29,6 @@ else:
     read_world(first_world, HEIGHT)
     world = Game(HEIGHT, WEIGHT)
     world.set_world(first_world)
+
     world.make_steps(k)
     world.print_world()

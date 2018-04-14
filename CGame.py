@@ -102,8 +102,8 @@ class Game:
                 print(self.world[i][j].char_type, end='')
             print()
 
-    def make_steps(self, kol):
-        for i in range(kol):
+    def make_steps(self, steps_number):
+        for i in range(steps_number):
             self.update_world()
 
     def print_world_file(self):

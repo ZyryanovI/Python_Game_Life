@@ -23,10 +23,7 @@ class TestSize11(ITest):
         my_world.set_world(lst)
         for l in range(12):
             my_world.update_world()
-        if my_world.world[0][0] == CNothingType():
-            return True
-        else:
-            return False
+        return my_world.world[0][0] == CNothingType()
 
 
 class TestSize12(ITest):
@@ -37,10 +34,7 @@ class TestSize12(ITest):
         my_world.set_world(lst)
         for l in range(7):
             my_world.update_world()
-        if my_world.world[0][0].char_type == 'r':
-            return True
-        else:
-            return False
+        return my_world.world[0][0].char_type == 'r'
 
 
 class TestSize21(ITest):
@@ -50,10 +44,7 @@ class TestSize21(ITest):
         my_world.set_world([['f', 'f'], ['f', 'f']])
         for l in range(8):
             my_world.update_world()
-        if my_world.world == [[CFishType(), CFishType()], [CFishType(), CFishType()]]:
-            return True
-        else:
-            return False
+        return my_world.world == [[CFishType(), CFishType()], [CFishType(), CFishType()]]
 
 
 class TestSize22(ITest):
@@ -63,10 +54,7 @@ class TestSize22(ITest):
         my_world.set_world([['n', 'f'], ['f', 'f']])
         for l in range(2):
             my_world.update_world()
-        if my_world.world == [[CFishType(), CFishType()], [CFishType(), CFishType()]]:
-            return True
-        else:
-            return False
+        return my_world.world == [[CFishType(), CFishType()], [CFishType(), CFishType()]]
 
 
 class TestSize23(ITest):
@@ -76,11 +64,8 @@ class TestSize23(ITest):
         my_world.set_world([['n', 'f'], ['f', 's']])
         for l in range(3):
             my_world.update_world()
-        if my_world.world == [[CNothingType(), CNothingType()],
-                              [CNothingType(), CNothingType()]]:
-            return True
-        else:
-            return False
+        return my_world.world == [[CNothingType(), CNothingType()],
+                              [CNothingType(), CNothingType()]]
 
 
 class TestSize31(ITest):
@@ -90,12 +75,9 @@ class TestSize31(ITest):
         my_world.set_world([['s', 'f', 's'], ['f', 's', 'f'], ['s', 'f', 's']])
         for l in range(3):
             my_world.update_world()
-        if my_world.world == [[CNothingType(), CFishType(), CNothingType()],
+        return my_world.world == [[CNothingType(), CFishType(), CNothingType()],
                               [CFishType(), CNothingType(), CFishType()],
-                              [CNothingType(), CFishType(), CNothingType()]]:
-            return True
-        else:
-            return False
+                              [CNothingType(), CFishType(), CNothingType()]]
 
 
 class TestSize32(ITest):
@@ -105,11 +87,8 @@ class TestSize32(ITest):
         my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
         for l in range(3):
             my_world.update_world()
-        if my_world.world == [[CNothingType(), CNothingType(), CNothingType()],
-                              [CNothingType(), CNothingType(), CNothingType()]]:
-            return True
-        else:
-            return False
+        return my_world.world == [[CNothingType(), CNothingType(), CNothingType()],
+                              [CNothingType(), CNothingType(), CNothingType()]]
 
 
 class TestSizeN(ITest):
@@ -137,31 +116,22 @@ class TestMakeSteps(ITest):
         my_world = Game(2, 3)
         my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
         my_world.make_steps(3)
-        if my_world.world == [[CNothingType(), CNothingType(), CNothingType()],
-                              [CNothingType(), CNothingType(), CNothingType()]]:
-            return True
-        else:
-            return False
+        return my_world.world == [[CNothingType(), CNothingType(), CNothingType()],
+                              [CNothingType(), CNothingType(), CNothingType()]]
 
 
 class TestSetWorld(ITest):
     def do_test(self):
         my_world = Game(2, 3)
         my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
-        if my_world.world == [[CFishType(), CFishType(), CFishType()],
-                              [CFishType(), CFishType(), CFishType()]]:
-            return True
-        else:
-            return False
+        return my_world.world == [[CFishType(), CFishType(), CFishType()],
+                              [CFishType(), CFishType(), CFishType()]]
 
 
 class TestInit(ITest):
     def do_test(self):
         my_world = Game(1, 1)
-        if (my_world.weight == 1) and (my_world.height == 1) and (my_world.world[0][0] == CNothingType()):
-            return True
-        else:
-            return False
+        return (my_world.weight == 1) and (my_world.height == 1) and (my_world.world[0][0] == CNothingType())
 
 
 class TestGetNeighbors(ITest):
@@ -169,10 +139,7 @@ class TestGetNeighbors(ITest):
         my_world = Game(2, 2)
         my_world.set_world([['n', 'f'], ['f', 's']])
         d_f_t = my_world.get_neighbors(0, 0)
-        if (d_f_t['n'] == 0) and (d_f_t['f'] == 2) and (d_f_t['s'] == 1) and (d_f_t['r'] == 0):
-            return True
-        else:
-            return False
+        return (d_f_t['n'] == 0) and (d_f_t['f'] == 2) and (d_f_t['s'] == 1) and (d_f_t['r'] == 0)
 
 
 #  ***********************************************************************

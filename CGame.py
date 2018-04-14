@@ -77,8 +77,6 @@ class Game:
 
     def get_neighbors(self, x, y):
         dict_count = collections.defaultdict(int)
-        for k in self.cell_types:
-            dict_count[k] = 0
         for i in [1, -1, 0]:
             for j in [1, -1, 0]:
                 if (x + i >= 0) and (x + i < self.height):

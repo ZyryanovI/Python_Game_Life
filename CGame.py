@@ -2,57 +2,57 @@ import collections
 from abc import abstractmethod
 
 
-class IObject:
+class Object:
 
     def __eq__(self, other):
         return self.char_type == other.char_type
 
     @abstractmethod
     def update(self, neighbors):
-         '''function '''
+        return Object()
 
 
-class CNothingObject(IObject):
+class NothingObject(Object):
 
     char_type = 'n'
 
     def update(self, neighbors):
         if neighbors['f'] == 3:
-            return CFishObject()
+            return FishObject()
         elif neighbors['s'] == 3:
-            return CShrimObject()
+            return ShrimObject()
         else:
-            return CNothingObject()
+            return NothingObject()
 
 
-class CRockObject(IObject):
+class RockObject(Object):
 
     char_type = 'r'
 
     def update(self, neighbors):
-        return CRockObject()
+        return RockObject()
 
 
-class CFishObject(IObject):
+class FishObject(Object):
 
     char_type = 'f'
 
     def update(self, neighbors):
         if (neighbors['f'] == 2) or (neighbors['f'] == 3):
-            return CFishObject()
+            return FishObject()
         else:
-            return CNothingObject()
+            return NothingObject()
 
 
-class CShrimObject(IObject):
+class ShrimObject(Object):
 
     char_type = 's'
 
     def update(self, neighbors):
         if (neighbors['s'] == 2) or (neighbors['s'] == 3):
-            return CShrimObject()
+            return ShrimObject()
         else:
-            return CNothingObject()
+            return NothingObject()
 
 
 class Game:
@@ -60,13 +60,13 @@ class Game:
     def __init__(self, height, weight):
         self.height = height
         self.weight = weight
-        self.world = [[CNothingObject()]*weight for _ in range(height)]
+        self.world = [[NothingObject()]*weight for _ in range(height)]
 
     def set_world(self, lst):
-        cell_types_dict = {'n': CNothingObject(),
-                           'f': CFishObject(),
-                           'r': CRockObject(),
-                           's': CShrimObject()}
+        cell_types_dict = {'n': NothingObject(),
+                           'f': FishObject(),
+                           'r': RockObject(),
+                           's': ShrimObject()}
         for i in range(self.height):
             for j in range(self.weight):
                 self.world[i][j] = cell_types_dict[lst[i][j]]
@@ -82,7 +82,7 @@ class Game:
         return dict_count
 
     def update_world(self):
-        new_world = [[CNothingObject()]*self.weight for _ in range(self.height)]
+        new_world = [[NothingObject()]*self.weight for _ in range(self.height)]
         for i in range(self.height):
             for j in range(self.weight):
                 neighbors = self.get_neighbors(i, j)

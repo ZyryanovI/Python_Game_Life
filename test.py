@@ -6,7 +6,7 @@ from CGame import *
 class ITest:
 
     def do_test(self):
-        ''' func '''
+        return True
 
     def print_ok(self, i):
         print('test ', i, ' - Ok')
@@ -23,7 +23,7 @@ class TestSize11(ITest):
         my_world.set_world(lst)
         for l in range(12):
             my_world.update_world()
-        return my_world.world[0][0] == CNothingObject()
+        return my_world.world[0][0] == NothingObject()
 
 
 class TestSize12(ITest):
@@ -44,7 +44,8 @@ class TestSize21(ITest):
         my_world.set_world([['f', 'f'], ['f', 'f']])
         for l in range(8):
             my_world.update_world()
-        return my_world.world == [[CFishObject(), CFishObject()], [CFishObject(), CFishObject()]]
+        return my_world.world == [[FishObject(), FishObject()],
+                                  [FishObject(), FishObject()]]
 
 
 class TestSize22(ITest):
@@ -54,7 +55,8 @@ class TestSize22(ITest):
         my_world.set_world([['n', 'f'], ['f', 'f']])
         for l in range(2):
             my_world.update_world()
-        return my_world.world == [[CFishObject(), CFishObject()], [CFishObject(), CFishObject()]]
+        return my_world.world == [[FishObject(), FishObject()],
+                                  [FishObject(), FishObject()]]
 
 
 class TestSize23(ITest):
@@ -64,8 +66,8 @@ class TestSize23(ITest):
         my_world.set_world([['n', 'f'], ['f', 's']])
         for l in range(3):
             my_world.update_world()
-        return my_world.world == [[CNothingObject(), CNothingObject()],
-                                  [CNothingObject(), CNothingObject()]]
+        return my_world.world == [[NothingObject(), NothingObject()],
+                                  [NothingObject(), NothingObject()]]
 
 
 class TestSize31(ITest):
@@ -75,9 +77,12 @@ class TestSize31(ITest):
         my_world.set_world([['s', 'f', 's'], ['f', 's', 'f'], ['s', 'f', 's']])
         for l in range(3):
             my_world.update_world()
-        return my_world.world == [[CNothingObject(), CFishObject(), CNothingObject()],
-                                  [CFishObject(), CNothingObject(), CFishObject()],
-                                  [CNothingObject(), CFishObject(), CNothingObject()]]
+        return my_world.world == [[NothingObject(), FishObject(),
+                                   NothingObject()],
+                                  [FishObject(),
+                                   NothingObject(), FishObject()],
+                                  [NothingObject(), FishObject(),
+                                   NothingObject()]]
 
 
 class TestSize32(ITest):
@@ -87,8 +92,10 @@ class TestSize32(ITest):
         my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
         for l in range(3):
             my_world.update_world()
-        return my_world.world == [[CNothingObject(), CNothingObject(), CNothingObject()],
-                                  [CNothingObject(), CNothingObject(), CNothingObject()]]
+        return my_world.world == [[NothingObject(), NothingObject(),
+                                   NothingObject()],
+                                  [NothingObject(), NothingObject(),
+                                   NothingObject()]]
 
 
 class TestSizeN(ITest):
@@ -116,22 +123,28 @@ class TestMakeSteps(ITest):
         my_world = Game(2, 3)
         my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
         my_world.make_steps(3)
-        return my_world.world == [[CNothingObject(), CNothingObject(), CNothingObject()],
-                              [CNothingObject(), CNothingObject(), CNothingObject()]]
+        return my_world.world == [[NothingObject(), NothingObject(),
+                                   NothingObject()],
+                                  [NothingObject(), NothingObject(),
+                                   NothingObject()]]
 
 
 class TestSetWorld(ITest):
     def do_test(self):
         my_world = Game(2, 3)
         my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
-        return my_world.world == [[CFishObject(), CFishObject(), CFishObject()],
-                              [CFishObject(), CFishObject(), CFishObject()]]
+        return my_world.world == [[FishObject(), FishObject(),
+                                   FishObject()],
+                                  [FishObject(), FishObject(),
+                                   FishObject()]]
 
 
 class TestInit(ITest):
     def do_test(self):
         my_world = Game(1, 1)
-        return (my_world.weight == 1) and (my_world.height == 1) and (my_world.world[0][0] == CNothingObject())
+        return (my_world.weight == 1) and\
+               (my_world.height == 1) and\
+               (my_world.world[0][0] == NothingObject())
 
 
 class TestGetNeighbors(ITest):
@@ -139,15 +152,20 @@ class TestGetNeighbors(ITest):
         my_world = Game(2, 2)
         my_world.set_world([['n', 'f'], ['f', 's']])
         d_f_t = my_world.get_neighbors(0, 0)
-        return (d_f_t['n'] == 0) and (d_f_t['f'] == 2) and (d_f_t['s'] == 1) and (d_f_t['r'] == 0)
+        return (d_f_t['n'] == 0) and\
+               (d_f_t['f'] == 2) and\
+               (d_f_t['s'] == 1) and\
+               (d_f_t['r'] == 0)
 
 
 #  ***********************************************************************
 
 
 def custom_tests():
-    test_list = [TestSize11(), TestSize12(), TestSize21(), TestSize22(), TestSize23(),
-                 TestSize31(), TestSize32(), TestSizeN(), TestMakeSteps(), TestSetWorld(),
+    test_list = [TestSize11(), TestSize12(),
+                 TestSize21(), TestSize22(), TestSize23(),
+                 TestSize31(), TestSize32(), TestSizeN(),
+                 TestMakeSteps(), TestSetWorld(),
                  TestInit(), TestGetNeighbors()]
     for i in range(len(test_list)):
         if test_list[i].do_test():

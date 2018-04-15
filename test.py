@@ -23,7 +23,7 @@ class TestSize11(ITest):
         my_world.set_world(lst)
         for l in range(12):
             my_world.update_world()
-        return my_world.world[0][0] == CNothingType()
+        return my_world.world[0][0] == CNothingObject()
 
 
 class TestSize12(ITest):
@@ -44,7 +44,7 @@ class TestSize21(ITest):
         my_world.set_world([['f', 'f'], ['f', 'f']])
         for l in range(8):
             my_world.update_world()
-        return my_world.world == [[CFishType(), CFishType()], [CFishType(), CFishType()]]
+        return my_world.world == [[CFishObject(), CFishObject()], [CFishObject(), CFishObject()]]
 
 
 class TestSize22(ITest):
@@ -54,7 +54,7 @@ class TestSize22(ITest):
         my_world.set_world([['n', 'f'], ['f', 'f']])
         for l in range(2):
             my_world.update_world()
-        return my_world.world == [[CFishType(), CFishType()], [CFishType(), CFishType()]]
+        return my_world.world == [[CFishObject(), CFishObject()], [CFishObject(), CFishObject()]]
 
 
 class TestSize23(ITest):
@@ -64,8 +64,8 @@ class TestSize23(ITest):
         my_world.set_world([['n', 'f'], ['f', 's']])
         for l in range(3):
             my_world.update_world()
-        return my_world.world == [[CNothingType(), CNothingType()],
-                              [CNothingType(), CNothingType()]]
+        return my_world.world == [[CNothingObject(), CNothingObject()],
+                                  [CNothingObject(), CNothingObject()]]
 
 
 class TestSize31(ITest):
@@ -75,9 +75,9 @@ class TestSize31(ITest):
         my_world.set_world([['s', 'f', 's'], ['f', 's', 'f'], ['s', 'f', 's']])
         for l in range(3):
             my_world.update_world()
-        return my_world.world == [[CNothingType(), CFishType(), CNothingType()],
-                              [CFishType(), CNothingType(), CFishType()],
-                              [CNothingType(), CFishType(), CNothingType()]]
+        return my_world.world == [[CNothingObject(), CFishObject(), CNothingObject()],
+                                  [CFishObject(), CNothingObject(), CFishObject()],
+                                  [CNothingObject(), CFishObject(), CNothingObject()]]
 
 
 class TestSize32(ITest):
@@ -87,8 +87,8 @@ class TestSize32(ITest):
         my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
         for l in range(3):
             my_world.update_world()
-        return my_world.world == [[CNothingType(), CNothingType(), CNothingType()],
-                              [CNothingType(), CNothingType(), CNothingType()]]
+        return my_world.world == [[CNothingObject(), CNothingObject(), CNothingObject()],
+                                  [CNothingObject(), CNothingObject(), CNothingObject()]]
 
 
 class TestSizeN(ITest):
@@ -116,22 +116,22 @@ class TestMakeSteps(ITest):
         my_world = Game(2, 3)
         my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
         my_world.make_steps(3)
-        return my_world.world == [[CNothingType(), CNothingType(), CNothingType()],
-                              [CNothingType(), CNothingType(), CNothingType()]]
+        return my_world.world == [[CNothingObject(), CNothingObject(), CNothingObject()],
+                              [CNothingObject(), CNothingObject(), CNothingObject()]]
 
 
 class TestSetWorld(ITest):
     def do_test(self):
         my_world = Game(2, 3)
         my_world.set_world([['f', 'f', 'f'], ['f', 'f', 'f']])
-        return my_world.world == [[CFishType(), CFishType(), CFishType()],
-                              [CFishType(), CFishType(), CFishType()]]
+        return my_world.world == [[CFishObject(), CFishObject(), CFishObject()],
+                              [CFishObject(), CFishObject(), CFishObject()]]
 
 
 class TestInit(ITest):
     def do_test(self):
         my_world = Game(1, 1)
-        return (my_world.weight == 1) and (my_world.height == 1) and (my_world.world[0][0] == CNothingType())
+        return (my_world.weight == 1) and (my_world.height == 1) and (my_world.world[0][0] == CNothingObject())
 
 
 class TestGetNeighbors(ITest):

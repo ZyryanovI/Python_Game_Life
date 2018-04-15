@@ -158,6 +158,68 @@ class TestGetNeighbors(ITest):
                (d_f_t['r'] == 0)
 
 
+class TestUpdateRock(ITest):
+    def do_test(self):
+        my_world = Game(2, 2)
+        my_world.set_world([['r', 'f'], ['f', 'f']])
+        my_world.world[0][0] = my_world.world[0][0].update({'n': 0, 's': 0,
+                                                            'f': 3, 'r': 0})
+        return my_world.world[0][0].char_type == 'r'
+
+
+class TestUpdateNothingFish(ITest):
+    def do_test(self):
+        my_world = Game(2, 2)
+        my_world.set_world([['n', 'f'], ['f', 'f']])
+        my_world.world[0][0] = my_world.world[0][0].update({'n': 0, 's': 0,
+                                                            'f': 3, 'r': 0})
+        return my_world.world[0][0].char_type == 'f'
+
+
+class TestUpdateNothingShirm(ITest):
+    def do_test(self):
+        my_world = Game(2, 2)
+        my_world.set_world([['n', 's'], ['s', 's']])
+        my_world.world[0][0] = my_world.world[0][0].update({'n': 0, 's': 3,
+                                                            'f': 0, 'r': 0})
+        return my_world.world[0][0].char_type == 's'
+
+
+class TestUpdateFishDie(ITest):
+    def do_test(self):
+        my_world = Game(2, 2)
+        my_world.set_world([['f', 'f'], ['r', 'r']])
+        my_world.world[0][0] = my_world.world[0][0].update({'n': 0, 's': 0,
+                                                            'f': 1, 'r': 2})
+        return my_world.world[0][0].char_type == 'n'
+
+
+class TestUpdateFishLive(ITest):
+    def do_test(self):
+        my_world = Game(2, 2)
+        my_world.set_world([['f', 'f'], ['f', 'f']])
+        my_world.world[0][0] = my_world.world[0][0].update({'n': 0, 's': 0,
+                                                            'f': 3, 'r': 0})
+        return my_world.world[0][0].char_type == 'f'
+
+
+class TestUpdateShirmDie(ITest):
+    def do_test(self):
+        my_world = Game(2, 2)
+        my_world.set_world([['s', 'f'], ['f', 'f']])
+        my_world.world[0][0] = my_world.world[0][0].update({'n': 0, 's': 0,
+                                                            'f': 3, 'r': 0})
+        return my_world.world[0][0].char_type == 'n'
+
+
+class TestUpdateShirmLive(ITest):
+    def do_test(self):
+        my_world = Game(2, 2)
+        my_world.set_world([['s', 's'], ['s', 's']])
+        my_world.world[0][0] = my_world.world[0][0].update({'n': 0, 's': 3,
+                                                            'f': 0, 'r': 0})
+        return my_world.world[0][0].char_type == 's'
+
 #  ***********************************************************************
 
 
@@ -166,7 +228,11 @@ def custom_tests():
                  TestSize21(), TestSize22(), TestSize23(),
                  TestSize31(), TestSize32(), TestSizeN(),
                  TestMakeSteps(), TestSetWorld(),
-                 TestInit(), TestGetNeighbors()]
+                 TestInit(), TestGetNeighbors(),
+                 TestUpdateRock(), TestUpdateNothingFish(),
+                 TestUpdateFishDie(), TestUpdateShirmDie(),
+                 TestUpdateFishLive(), TestUpdateShirmLive(),
+                 TestUpdateNothingShirm()]
     for i in range(len(test_list)):
         if test_list[i].do_test():
             test_list[i].print_ok(i+1)

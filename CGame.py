@@ -2,7 +2,7 @@ import collections
 from abc import abstractmethod
 
 
-class Object:
+class Animal:
 
     def __eq__(self, other):
         return self.char_type == other.char_type
@@ -12,47 +12,47 @@ class Object:
         return Object()
 
 
-class NothingObject(Object):
+class Nothing(Animal):
 
     char_type = 'n'
 
     def update(self, neighbors):
         if neighbors['f'] == 3:
-            return FishObject()
+            return Fish()
         elif neighbors['s'] == 3:
-            return ShrimObject()
+            return Shrim()
         else:
-            return NothingObject()
+            return Nothing()
 
 
-class RockObject(Object):
+class Rock(Animal):
 
     char_type = 'r'
 
     def update(self, neighbors):
-        return RockObject()
+        return Rock()
 
 
-class FishObject(Object):
+class Fish(Animal):
 
     char_type = 'f'
 
     def update(self, neighbors):
         if (neighbors['f'] == 2) or (neighbors['f'] == 3):
-            return FishObject()
+            return Fish()
         else:
-            return NothingObject()
+            return Nothing()
 
 
-class ShrimObject(Object):
+class Shrim(Animal):
 
     char_type = 's'
 
     def update(self, neighbors):
         if (neighbors['s'] == 2) or (neighbors['s'] == 3):
-            return ShrimObject()
+            return Shrim()
         else:
-            return NothingObject()
+            return Nothing()
 
 
 class Game:
@@ -60,13 +60,13 @@ class Game:
     def __init__(self, height, weight):
         self.height = height
         self.weight = weight
-        self.world = [[NothingObject()]*weight for _ in range(height)]
+        self.world = [[Nothing()]*weight for _ in range(height)]
 
     def set_world(self, lst):
-        cell_types_dict = {'n': NothingObject(),
-                           'f': FishObject(),
-                           'r': RockObject(),
-                           's': ShrimObject()}
+        cell_types_dict = {'n': Nothing(),
+                           'f': Fish(),
+                           'r': Rock(),
+                           's': Shrim()}
         for i in range(self.height):
             for j in range(self.weight):
                 self.world[i][j] = cell_types_dict[lst[i][j]]
@@ -82,7 +82,7 @@ class Game:
         return dict_count
 
     def update_world(self):
-        new_world = [[NothingObject()]*self.weight for _ in range(self.height)]
+        new_world = [[Nothing()]*self.weight for _ in range(self.height)]
         for i in range(self.height):
             for j in range(self.weight):
                 neighbors = self.get_neighbors(i, j)

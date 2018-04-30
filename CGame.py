@@ -100,14 +100,14 @@ class Game:
         for i in range(steps_number):
             self.update_world()
 
-    def print_world_file(self):
+'''    def print_world_file(self):
         for_writing = open("output.txt", "w")
         for i in range(self.height):
             for j in range(self.weight):
                 for_writing.write(self.world[i][j])
             for_writing.write('\n')
 
-        for_writing.close()
+        for_writing.close() '''
 
 
 def read_world(cur_world, height):

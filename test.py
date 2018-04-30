@@ -242,4 +242,3 @@ def custom_tests():
     print("That is all")
 
 
-custom_tests()

@@ -2,7 +2,8 @@ import collections
 from abc import abstractmethod
 
 
-class Animal:
+class Animal(object):
+    char_type = ''
 
     def __eq__(self, other):
         return self.char_type == other.char_type
@@ -63,10 +64,9 @@ class Game:
         self.world = [[Nothing()]*weight for _ in range(height)]
 
     def set_world(self, lst):
-        cell_types_dict = {'n': Nothing(),
-                           'f': Fish(),
-                           'r': Rock(),
-                           's': Shrim()}
+        cell_types_list = Animal.__subclasses__()
+        cell_types_dict = {i.char_type: i() for i in cell_types_list}
+
         for i in range(self.height):
             for j in range(self.weight):
                 self.world[i][j] = cell_types_dict[lst[i][j]]

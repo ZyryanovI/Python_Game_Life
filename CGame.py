@@ -9,7 +9,7 @@ class Animal:
 
     @abstractmethod
     def update(self, neighbors):
-        return Object()
+        return Animal()
 
 
 class Nothing(Animal):
@@ -75,9 +75,9 @@ class Game:
         dict_count = collections.defaultdict(int)
         for i in [1, -1, 0]:
             for j in [1, -1, 0]:
-                if (x + i >= 0) and (x + i < self.height):
-                    if (y + j >= 0) and (y + j < self.weight):
-                        if (not i == 0) or (not j == 0):
+                if (x + i >= 0) and (x + i < self.height) and\
+                        (y + j >= 0) and (y + j < self.weight) and\
+                        ((i != 0) or (j != 0)):
                             dict_count[self.world[x+i][y+j].char_type] += 1
         return dict_count
 

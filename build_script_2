@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "If you want to start with tests press w, if you want to start without tests press n"
+test_flag=$1
+
+read test_flag
+
+if [[ $test_flag = 'w' ]]
+then
+    chmod +x ./test.py
+    ./test.py
+else
+    echo "If you want to work with files write f before description of the first state"
+    chmod +x ./main.py
+    ./main.py
+fi
